@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/*
+  plantED design tokens
+  paper   – daylight through shade net
+  canopy  – mature avocado leaf
+  flesh   – the inside of a ripe avocado
+  murram  – Kenyan red soil, used sparingly for places
+*/
+@theme {
+  --font-display: "Bitter", Georgia, serif;
+  --font-sans: "Fira Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-paper: #f2f3ec;
+  --color-ink: #1b231d;
+  --color-muted: #586259;
+  --color-line: #d3d8c8;
+  --color-canopy: #1f4130;
+  --color-canopy-deep: #132a1f;
+  --color-leaf: #2f6b3f;
+  --color-flesh: #e3eab4;
+  --color-murram: #9c4a2b;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-flesh);
+    color: var(--color-canopy-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-leaf);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-medium transition-colors duration-200;
+}
+
+@utility btn-primary {
+  @apply btn bg-canopy text-paper hover:bg-canopy-deep;
+}
+
+@utility btn-light {
+  @apply btn bg-paper text-canopy-deep hover:bg-flesh;
+}
+
+@utility btn-ghost-light {
+  @apply btn border border-paper/50 text-paper hover:border-paper hover:bg-paper/10;
+}
+
+@utility link-underline {
+  @apply font-medium text-leaf underline decoration-leaf/40 decoration-1 underline-offset-4 transition-colors hover:decoration-leaf;
+}
+
+@utility field {
+  @apply w-full rounded-md border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 transition-colors focus:border-leaf focus:outline-none focus:ring-2 focus:ring-leaf/20;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
